@@ -18,6 +18,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.GridView;
+
 public class MainActivity extends AppCompatActivity {
     //declare the variables
     TextView TextWordToBeGuessed;
@@ -36,6 +43,22 @@ public class MainActivity extends AppCompatActivity {
     Animation  rotateAnimation;
     Animation scaleAnimation;
     Animation scaleAndRotateAnimation;
+    //gridview buttons
+    private GridView letters;
+    private LetterAdapter ltrAdapt;
+    //body part images
+    private ImageView[] bodyParts;
+    //number of body parts
+    private int numParts=6;
+    //current part - will increment when wrong answers are chosen
+    //guess left
+    private int currPart;
+    //number of characters in current word
+
+    private int numChars;
+    //number correctly guessed
+
+    private int numCorr;
 
     void revealLetterInWord(char letter){
         int indexOfLetter = wordToBeGuessed.indexOf(letter);
@@ -58,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
     void initializeGame (){
+        //gridview button
+        ltrAdapt= new LetterAdapter(this);
+        letters.setAdapter(ltrAdapt);
+
+//        for(int p = 0; p < numParts; p++) {
+//            bodyParts[p].setVisibility(View.INVISIBLE);
+//        }
+
         //1.Word
         //shuffle array list and get the first element and then remove it
         Collections.shuffle(myListOfWords);
@@ -105,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //intialize variables
         myListOfWords = new ArrayList<String>();
+
         TextWordToBeGuessed = findViewById(R.id.activity_main_word_to_be_guessed_textview);
         editInput = findViewById(R.id.activity_main_input_editText);
         TextLettersTried = findViewById(R.id.activity_main_letters_used);
@@ -113,6 +145,14 @@ public class MainActivity extends AppCompatActivity {
         scaleAnimation = AnimationUtils.loadAnimation(this,R.anim.scale);
         scaleAndRotateAnimation = AnimationUtils.loadAnimation(this,R.anim.scale_and_rotate);
         scaleAndRotateAnimation.setFillAfter(true);
+        //body
+//        bodyParts = new ImageView[numParts];
+//        bodyParts[0] = (ImageView)findViewById(R.id.head);
+//        bodyParts[1] = (ImageView)findViewById(R.id.body);
+//        bodyParts[2] = (ImageView)findViewById(R.id.arm1);
+//        bodyParts[3] = (ImageView)findViewById(R.id.arm2);
+//        bodyParts[4] = (ImageView)findViewById(R.id.leg1);
+//        bodyParts[5] = (ImageView)findViewById(R.id.leg2);
 
         //traverse database file and populate array list
         InputStream myInputStream = null;
@@ -147,6 +187,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+        //letters
+        letters = findViewById(R.id.letters);
          initializeGame();
 
         // setup the text changed listner for the edit text
@@ -232,6 +274,27 @@ public class MainActivity extends AppCompatActivity {
         //setup new game
         initializeGame();
         editInput.setText("");
+
+    }
+
+    public void letterPressed(View view) {
+        //when player taps button letterpressed recieves a reference
+        String ltr=((TextView)view).getText().toString();
+        //get char from the string
+        char letterChar = ltr.charAt(0);
+        //disable button
+        view.setEnabled(false);
+        view.setBackgroundResource(R.drawable.letter_down);
+
+        //loop through the characters of the target word to verify whether the player's guess is in it.
+//        boolean correct = false;
+//        for(int k = 0; k < currWord.length(); k++) {
+//            if(currWord.charAt(k)==letterChar){
+//                correct = true;
+//                numCorr++;
+//                charViews[k].setTextColor(Color.BLACK);
+//            }
+//        }
 
     }
 }
