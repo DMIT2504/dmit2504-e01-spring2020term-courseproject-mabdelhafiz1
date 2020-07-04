@@ -2,6 +2,7 @@ package ca.nait.hangman;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -85,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
         ltrAdapt= new LetterAdapter(this);
         letters.setAdapter(ltrAdapt);
 
-//        for(int p = 0; p < numParts; p++) {
-//            bodyParts[p].setVisibility(View.INVISIBLE);
-//        }
+        for(int p = 0; p < numParts; p++) {
+            bodyParts[p].setVisibility(View.INVISIBLE);
+        }
 
         //1.Word
         //shuffle array list and get the first element and then remove it
@@ -146,13 +147,13 @@ public class MainActivity extends AppCompatActivity {
         scaleAndRotateAnimation = AnimationUtils.loadAnimation(this,R.anim.scale_and_rotate);
         scaleAndRotateAnimation.setFillAfter(true);
         //body
-//        bodyParts = new ImageView[numParts];
-//        bodyParts[0] = (ImageView)findViewById(R.id.head);
-//        bodyParts[1] = (ImageView)findViewById(R.id.body);
-//        bodyParts[2] = (ImageView)findViewById(R.id.arm1);
-//        bodyParts[3] = (ImageView)findViewById(R.id.arm2);
-//        bodyParts[4] = (ImageView)findViewById(R.id.leg1);
-//        bodyParts[5] = (ImageView)findViewById(R.id.leg2);
+        bodyParts = new ImageView[numParts];
+        bodyParts[0] = (ImageView)findViewById(R.id.head);
+        bodyParts[1] = (ImageView)findViewById(R.id.body);
+        bodyParts[2] = (ImageView)findViewById(R.id.arm1);
+        bodyParts[3] = (ImageView)findViewById(R.id.arm2);
+        bodyParts[4] = (ImageView)findViewById(R.id.leg1);
+        bodyParts[5] = (ImageView)findViewById(R.id.leg2);
 
         //traverse database file and populate array list
         InputStream myInputStream = null;
@@ -286,15 +287,23 @@ public class MainActivity extends AppCompatActivity {
         view.setEnabled(false);
         view.setBackgroundResource(R.drawable.letter_down);
 
-        //loop through the characters of the target word to verify whether the player's guess is in it.
-//        boolean correct = false;
-//        for(int k = 0; k < currWord.length(); k++) {
-//            if(currWord.charAt(k)==letterChar){
-//                correct = true;
-//                numCorr++;
-//                charViews[k].setTextColor(Color.BLACK);
-//            }
-//        }
+        //loop
+        boolean correct = false;
+        for(int k = 0; k < wordToBeGuessed.length(); k++) {
+            if (wordToBeGuessed.charAt(k) == letterChar) {
+                correct = true;
+                numCorr++;
+                //charViews[k].setTextColor(Color.BLACK);
+            }
+        }
+        if(!wordDisplayedString.contains("_")) {
+            TextTriesLeft.startAnimation(scaleAndRotateAnimation);
+            TextTriesLeft.setText(WINNING_MESSAGE);
+        }
 
-    }
+
+
+
+
+    }//public tag
 }
