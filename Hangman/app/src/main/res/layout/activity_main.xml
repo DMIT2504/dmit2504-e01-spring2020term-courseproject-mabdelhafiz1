@@ -58,7 +58,8 @@
 <!--        android:background="@color/colorSecondary"-->
 <!--        android:textColor="@color/colorAccent"/>-->
 
-//hang man body
+    //hang man body
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -136,7 +137,17 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="10dp">
+
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/activity_main_reveal_button"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+
+        android:text="Hints" />
 
 
     <GridView
@@ -151,7 +162,9 @@
         android:padding="5dp"
         android:stretchMode="columnWidth"
         android:verticalSpacing="5dp"
-        />
+        >
+
+    </GridView>
 
 
 <!--    <TextView-->

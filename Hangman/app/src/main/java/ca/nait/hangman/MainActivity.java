@@ -4,35 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
-import java.util.Scanner;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.GridView;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     //declare the variables
@@ -75,13 +65,17 @@ public class MainActivity extends AppCompatActivity {
     private String currWord;
     private LinearLayout wordLayout;
     private TextView[] charViews;
+    //reveal text
+    Button RevealWordsButton;
+    int clickcount=0;
 
-    void revealLetterInWord(char letter){
-        int indexOfLetter = wordToBeGuessed.indexOf(letter);
+//fix
+    void revealLetterInWord(String letter){
+        int indexOfLetter = currWord.indexOf(letter);
         //loop if inde
         while(indexOfLetter >= 0){
-            wordDisplayedCharArray[indexOfLetter] = wordToBeGuessed.charAt(indexOfLetter);
-            indexOfLetter = wordToBeGuessed.indexOf(letter, indexOfLetter + 1);
+            wordDisplayedCharArray[indexOfLetter] = currWord.charAt(indexOfLetter);
+            indexOfLetter = currWord.indexOf(letter, indexOfLetter + 1);
 
         }
         //update string
@@ -169,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         rand = new Random();
         currWord = "";
         wordLayout = (LinearLayout)findViewById(R.id.word);
-
+        RevealWordsButton = findViewById(R.id.activity_main_reveal_button);
 
         //intialize variables
 //        myListOfWords = new ArrayList<String>();
@@ -178,10 +172,11 @@ public class MainActivity extends AppCompatActivity {
 //        editInput = findViewById(R.id.activity_main_input_editText);
 //        TextLettersTried = findViewById(R.id.activity_main_letters_used);
 //        TextTriesLeft = findViewById(R.id.activity_main_attemptsLeft);
-//        rotateAnimation  = AnimationUtils.loadAnimation(this,R.anim.rotate);
-//        scaleAnimation = AnimationUtils.loadAnimation(this,R.anim.scale);
-//        scaleAndRotateAnimation = AnimationUtils.loadAnimation(this,R.anim.scale_and_rotate);
-//        scaleAndRotateAnimation.setFillAfter(true);
+        //animation
+        rotateAnimation  = AnimationUtils.loadAnimation(this,R.anim.rotate);
+        scaleAnimation = AnimationUtils.loadAnimation(this,R.anim.scale);
+        scaleAndRotateAnimation = AnimationUtils.loadAnimation(this,R.anim.scale_and_rotate);
+        scaleAndRotateAnimation.setFillAfter(true);
 //
         //body
         bodyParts = new ImageView[numParts];
@@ -226,6 +221,20 @@ public class MainActivity extends AppCompatActivity {
 //                Toast.makeText(MainActivity.this, e.getClass().getSimpleName() + ": " + e.getMessage(),
 //                        Toast.LENGTH_SHORT).show();
 //            }
+
+        RevealWordsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO Auto-generated method stub
+                clickcount=clickcount+1;
+                charViews[clickcount].setTextColor(Color.BLACK);
+                if(clickcount >= 6){
+                    RevealWordsButton.setEnabled(false);
+                }
+                //start animation
+                v.startAnimation(rotateAnimation);
+            }
+        });
 
         }
 
@@ -349,6 +358,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void letterPressed(View view) {
         //when player taps button letterpressed recieves a reference
+        view.startAnimation( scaleAndRotateAnimation);
         String ltr=((TextView)view).getText().toString();
         //get char from the string
         char letterChar = ltr.charAt(0);
@@ -426,4 +436,15 @@ public class MainActivity extends AppCompatActivity {
             letters.getChildAt(l).setEnabled(false);
         }
     }
+
+    public void RevealWords(View view) {
+        charViews[0].setTextColor(Color.BLACK);
+        charViews[1].setTextColor(Color.BLACK);
+
+
+        //start animation
+      view.startAnimation(rotateAnimation);
+
+    }
+
 }
