@@ -61,12 +61,16 @@ public class MainActivity extends AppCompatActivity {
     //new method
     //before on create
     private String[] words;
+    private String[] dragonballzEpisodes;
+    private String[] dbsChars;
     private Random rand;
     private String currWord;
     private LinearLayout wordLayout;
     private TextView[] charViews;
     //reveal text
     Button RevealWordsButton;
+    Button DragonballZButton;
+    Button DragonballSuperButton;
     int clickcount=0;
 
 //fix
@@ -159,12 +163,15 @@ public class MainActivity extends AppCompatActivity {
         //new method
         Resources res = getResources();
         words = res.getStringArray(R.array.words);
+        dragonballzEpisodes = res.getStringArray(R.array.dragonballzEpisodes);
+        dbsChars = res.getStringArray(R.array.dbsChars);
         //new method intiallize
         rand = new Random();
         currWord = "";
         wordLayout = (LinearLayout)findViewById(R.id.word);
         RevealWordsButton = findViewById(R.id.activity_main_reveal_button);
-
+        DragonballZButton = findViewById(R.id.activity_main_DragonballC_button);
+        DragonballSuperButton = findViewById(R.id.activity_main_DragonballSuper_Button);
         //intialize variables
 //        myListOfWords = new ArrayList<String>();
 
@@ -236,6 +243,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        DragonballZButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playDbzEpisdoes();
+
+               v.setAnimation(scaleAndRotateAnimation);
+            }
+        });
+
+        DragonballSuperButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playDbs();
+                v.setAnimation(scaleAndRotateAnimation);
+            }
+        });
         }
 
          //initializeGame();
@@ -263,8 +286,8 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 //    }
-    private void playGame() {
-
+    private void playGame()
+    {
         //play a new game
         //get random word
         String newWord = words[rand.nextInt(words.length)];
@@ -297,6 +320,76 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    //dbz episdodes method
+    private void playDbzEpisdoes()
+    {
+        //play a new game
+        //get random word
+        String newWord = dragonballzEpisodes[rand.nextInt(dragonballzEpisodes.length)];
+        while(newWord.equals(currWord)) newWord = dragonballzEpisodes[rand.nextInt(dragonballzEpisodes.length)];
+        currWord = newWord;
+
+        charViews = new TextView[currWord.length()];
+        //remove all text views
+        wordLayout.removeAllViews();
+        ltrAdapt=new LetterAdapter(this);
+        letters.setAdapter(ltrAdapt);
+        // for to iterlate over each word in awnser
+        for (int c = 0; c < currWord.length(); c++) {
+            charViews[c] = new TextView(this);
+            charViews[c].setText(""+currWord.charAt(c));
+
+            charViews[c].setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+            charViews[c].setGravity(Gravity.CENTER);
+            charViews[c].setTextColor(Color.WHITE);
+            charViews[c].setBackgroundResource(R.drawable.letter_bg);
+            //add to layout
+            wordLayout.addView(charViews[c]);
+
+        }
+        currPart=0;
+        numChars=currWord.length();
+        numCorr=0;
+        for(int p = 0; p < numParts; p++) {
+            bodyParts[p].setVisibility(View.INVISIBLE);
+        }
+
+
+    }
+    private void playDbs() {
+        //play a new game
+        //get random word
+        String newWord = dbsChars[rand.nextInt(dbsChars.length)];
+        while (newWord.equals(currWord))
+            newWord = dbsChars[rand.nextInt(dbsChars.length)];
+        currWord = newWord;
+
+        charViews = new TextView[currWord.length()];
+        //remove all text views
+        wordLayout.removeAllViews();
+        ltrAdapt = new LetterAdapter(this);
+        letters.setAdapter(ltrAdapt);
+        // for to iterlate over each word in awnser
+        for (int c = 0; c < currWord.length(); c++) {
+            charViews[c] = new TextView(this);
+            charViews[c].setText("" + currWord.charAt(c));
+
+            charViews[c].setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+            charViews[c].setGravity(Gravity.CENTER);
+            charViews[c].setTextColor(Color.WHITE);
+            charViews[c].setBackgroundResource(R.drawable.letter_bg);
+            //add to layout
+            wordLayout.addView(charViews[c]);
+
+        }
+        currPart = 0;
+        numChars = currWord.length();
+        numCorr = 0;
+        for (int p = 0; p < numParts; p++) {
+            bodyParts[p].setVisibility(View.INVISIBLE);
+        }
     }
 
 //    void chechIfLetterIsInWord(char letter){
