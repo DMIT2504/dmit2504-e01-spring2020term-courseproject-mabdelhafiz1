@@ -1,0 +1,59 @@
+<resources>
+    <string-array name="words">
+            <item>CHARGER</item>
+            <item>COMPUTER</item>
+            <item>TABLET</item>
+            <item>SYSTEM</item>
+            <item>APPLICATION</item>
+            <item>INTERNET</item>
+            <item>STYLUS</item>
+            <item>ANDROID</item>
+            <item>KEYBOARD</item>
+            <item>SMARTPHONE</item>
+        </string-array>
+    <string-array name="dragonballzEpisodes">
+        <item>TheArrivalofRaditz</item>
+        <item>Reunions</item>
+        <item>UnlikelyAlliance</item>
+        <item>PiccolosPlan</item>
+        <item>GohansRage</item>
+        <item>NoTimeLikethePresent</item>
+        <item>TerroronArlia</item>
+        <item>GlobalTraining</item>
+        <item>GozandMez</item>
+        <item>PrincessSnake</item>
+        <item>DuelingPiccolos</item>
+        <item>PlightoftheChildren</item>
+        <item>PendulumRoomPeril</item>
+        <item> TheEndofSnakeWay </item>
+        <item>DefyingGravit</item>
+        <item>GokusAncestors</item>
+        <item>CountingDown</item>
+        <item>TheDarkestDay</item>
+    </string-array>
+    <string-array name="dbsChars">
+        <item>goku</item>
+        <item>vegeta</item>
+        <item>whis</item>
+        <item>beerus</item>
+        <item>krillin</item>
+        <item>piccolo</item>
+        <item>gohan</item>
+        <item>bulma</item>
+        <item>briefs</item>
+        <item>masterroshi</item>
+        <item>elderkai</item>
+        <item>supremekai</item>
+        <item>android18</item>
+        <item>tien</item>
+        <item>goten</item>
+        <item>trunks</item>
+        <item>vados</item>
+        <item>chichi</item>
+        <item>champa</item>
+        <item>frieza</item>
+        <item>grand priest</item>
+        <item>hercule</item>
+        <item>mai</item>
+    </string-array>
+</resources>
