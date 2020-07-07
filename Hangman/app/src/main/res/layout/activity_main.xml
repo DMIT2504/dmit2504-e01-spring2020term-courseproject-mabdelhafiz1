@@ -144,19 +144,18 @@
     <Button
         android:id="@+id/activity_main_reveal_button"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:text="Hints" />
 
     <Button
         android:id="@+id/activity_main_DragonballC_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dragonball Episodes" />
 
     <Button
         android:id="@+id/activity_main_DragonballSuper_Button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dragonball Super Characters" />
 
