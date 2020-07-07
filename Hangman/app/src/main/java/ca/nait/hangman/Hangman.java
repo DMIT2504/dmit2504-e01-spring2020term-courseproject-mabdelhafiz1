@@ -27,6 +27,7 @@ public class Hangman extends Activity implements OnClickListener  {
         if (view.getId() == R.id.playBtn) {
             Intent playIntent = new Intent(this, MainActivity.class);
             this.startActivity(playIntent);
+            overridePendingTransition(android.R.anim.slide_out_right, android.R.anim.fade_out);
         }
     }
 }
