@@ -2,7 +2,11 @@ package ca.nait.hangman;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -12,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -60,12 +65,15 @@ public class MainActivity extends AppCompatActivity {
     Button DragonballSuperButton;
     int clickcount=0;
     boolean clicked = false;
-
+    LinearLayout LinearOfMain;
+    //play dbz song
+    MediaPlayer player;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //find layout
+        LinearOfMain = findViewById(R.id.Linear_main_activity);
         //new method
         Resources res = getResources();
         words = res.getStringArray(R.array.words);
@@ -83,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         rotateAnimation  = AnimationUtils.loadAnimation(this,R.anim.rotate);
         scaleAnimation = AnimationUtils.loadAnimation(this,R.anim.scale);
         scaleAndRotateAnimation = AnimationUtils.loadAnimation(this,R.anim.scale_and_rotate);
-        
+
         //body
         bodyParts = new ImageView[numParts];
         bodyParts[0] = findViewById(R.id.head);
@@ -122,7 +130,15 @@ public class MainActivity extends AppCompatActivity {
                 playDbzEpisdoes();
                 clicked=true;
                 RevealWordsButton.setEnabled(true);
+                LinearOfMain.setBackgroundResource(R.drawable.dragonballz_opening);
                v.setAnimation(scaleAndRotateAnimation);
+               //music start
+                //if player is already created then don't create a new one
+               if(player == null){
+                   player = MediaPlayer.create(getApplicationContext(), R.raw.dragonballrockthedragon);
+               }
+               player.start();
+
             }
         });
 
@@ -132,7 +148,14 @@ public class MainActivity extends AppCompatActivity {
                 clicked=true;
                 playDbs();
                 RevealWordsButton.setEnabled(true);
+                LinearOfMain.setBackgroundResource(R.drawable.dragonballz_opening);
                 v.setAnimation(scaleAndRotateAnimation);
+                //music start
+                //if player is already created then don't create a new one
+                if(player == null){
+                    player = MediaPlayer.create(getApplicationContext(), R.raw.dragonballrockthedragon);
+                }
+                player.start();
             }
         });
         }

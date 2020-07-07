@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimary"
+    android:id="@+id/Linear_main_activity"
     >
 
     <TextView
@@ -19,44 +20,7 @@
         android:textSize="36sp"
         android:textColor="@color/colorAccent"/>
 
-<!--    <TextView-->
-<!--        android:id="@+id/activity_main_word_to_be_guessed_textview"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_weight="1"-->
-<!--        android:hint="Word to be guessed"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textSize="30sp"-->
-<!--        tools:text="Word to be guessed"-->
-<!--        android:textColor="@color/colorAccent"-->
-<!--        android:background="@color/colorSecondary"/>-->
 
-
-<!--    <EditText-->
-<!--        android:maxLength="1"-->
-<!--        android:textStyle="italic"-->
-<!--        android:id="@+id/activity_main_input_editText"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_weight="1"-->
-<!--        android:ems="10"-->
-<!--        android:hint="Input one letter"-->
-<!--        android:inputType="textPersonName"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textSize="18sp"-->
-<!--        android:textColor="@color/colorAccent"-->
-<!--        />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/activity_main_letters_used"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-
-<!--        android:text="Letters tried:"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textSize="30sp"-->
-<!--        android:background="@color/colorSecondary"-->
-<!--        android:textColor="@color/colorAccent"/>-->
 
     //hang man body
 
@@ -176,25 +140,5 @@
     </GridView>
 
 
-<!--    <TextView-->
-<!--        android:textStyle="bold"-->
-<!--        android:id="@+id/activity_main_attemptsLeft"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_weight="1"-->
-<!--        android:text="X X X X X "-->
-<!--        android:textAlignment="center"-->
-<!--        android:textSize="30sp"-->
-<!--        android:textColor="@color/colorAccent"/>-->
 
-<!--    <Button-->
-<!--        android:id="@+id/activity_main_reset_button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center|top"-->
-<!--        android:text="Reset"-->
-<!--        android:onClick="ResetGame"-->
-<!--        android:textSize="36sp"-->
-<!--        android:background="@color/colorPrimaryDark"-->
-<!--        android:textColor="@color/textColor"/>-->
 </LinearLayout>
