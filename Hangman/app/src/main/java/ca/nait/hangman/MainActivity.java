@@ -1,13 +1,19 @@
 package ca.nait.hangman;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationManager;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -30,7 +36,34 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.my_options_menu, menu);
+        return true;
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //respond to menu item selection
+        switch (item.getItemId()) {
+
+            case R.id.menu_item_music:
+                startActivity(new Intent(this, PlaymusicActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
     //declare the variables
+    private NotificationManagerCompat notificationManager;
+    private NotificationManager notifyManager;
+
     Animation  rotateAnimation;
     Animation scaleAnimation;
     Animation scaleAndRotateAnimation;
@@ -72,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         //find layout
         LinearOfMain = findViewById(R.id.Linear_main_activity);
         //new method
@@ -91,6 +126,10 @@ public class MainActivity extends AppCompatActivity {
         rotateAnimation  = AnimationUtils.loadAnimation(this,R.anim.rotate);
         scaleAnimation = AnimationUtils.loadAnimation(this,R.anim.scale);
         scaleAndRotateAnimation = AnimationUtils.loadAnimation(this,R.anim.scale_and_rotate);
+        //notify
+        notificationManager = NotificationManagerCompat.from(this);
+        //
+        NotificationManager notifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         //body
         bodyParts = new ImageView[numParts];
@@ -347,6 +386,14 @@ public class MainActivity extends AppCompatActivity {
         for (int l = 0; l < numLetters; l++) {
             letters.getChildAt(l).setEnabled(false);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+        playGame();
     }
 
 }
